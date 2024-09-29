@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20-Күндік Таймер</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212; /* Қаранғы фон түсі */
+            margin: 0;
+        }
+        #timer {
+            font-size: 4em; /* Таймердің көлемін үлкейту */
+            color: #00FF00; /* Жасыл түсті мәтін */
+            text-shadow: 2px 2px 4px #000000; /* Мәтінге көлеңке қосу */
+        }
+    </style>
+</head>
+<body>
+    <div id="timer">20 күн 0 сағат 0 минут 0 секунд қалды</div>
+
+    <script>
+        const timerElement = document.getElementById('timer');
+        const endTime = new Date().getTime() + 20 * 24 * 60 * 60 * 1000; // 20 күннен кейінгі уақыт
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const timeLeft = endTime - now;
+
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                timerElement.textContent = `${days} күн ${hours} сағат ${minutes} минут ${seconds} секунд қалды`;
+            } else {
+                timerElement.textContent = "Таймер аяқталды!";
+            }
+        }
+
+        updateTimer(); // Алғашқы рет жаңарту
+        setInterval(updateTimer, 1000); // Таймерді әр секунд сайын жаңарту
+    </script>
+</body>
+</html>
